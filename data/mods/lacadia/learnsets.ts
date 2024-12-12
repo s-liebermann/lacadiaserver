@@ -8,6 +8,7 @@ export const Learnsets: {[speciesid: string]: ModdedLearnsetData} = {
 			attract: ["7M", "6M", "5M"],
 			beanbarrage: ["9M"],
 			bind: ["7T", "6T", "5T"],
+			bodypress: ["9M"],
 			bodyslam: ["9M"],
 			breakingswipe: ["9M"],
 			brutalswing: ["7M"],
