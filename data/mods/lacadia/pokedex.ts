@@ -37,4 +37,17 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "Green",
 		eggGroups: ["Field", "Grass"],
 	},
+	purrluxe: {
+		num: 2006,
+		name: "Purrluxe",
+		types: ["Water"],
+		genderRatio: {M: 0.875, F: 0.125},
+		baseStats: {hp: 50, atk: 55, def: 60, spa: 45, spd: 50, spe: 40},
+		abilities: {0: "Torrent", H: "Stamina"},
+		heightm: 0.3,
+		weightkg: 5,
+		color: "Blue",
+		//evos: ["Lyonite"],
+		eggGroups: ["Field", "Water"],
+	}
 };
