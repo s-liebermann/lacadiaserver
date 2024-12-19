@@ -912,17 +912,6 @@ export const Formats: FormatList = [
 		banlist: ['Uber', 'AG', 'Arena Trap', 'Moody', 'Shadow Tag', 'King\'s Rock', 'Baton Pass', 'Last Respects', 'Shed Tail'],
 	},
 	{
-		name: "[Gen 3] Hoenn Gaiden OU",
-		desc: ["<b>Hoenn Gaiden</b>: A Gen 3 pet mod that aims to devamp Gen 4-8 Pokemon, moves and items into the Gen 3 mechanics."],
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/hoenn-gaiden-pet-mod-of-the-season.3714737/">Hoenn Gaiden on Smogon Forums</a>`,
-		],
-		mod: 'gen3hoenngaiden',
-		ruleset: ['HG Standard', 'Data Mod', 'Freeze Clause Mod'],
-		banlist: ['Uber'],
-		unbanlist: ['Sand Veil'],
-	},
-	{
 		name: "[Gen 9] Iron Fist",
 		threads: [
 			`<a href="https://www.smogon.com/forums/threads/.3748853/">Iron Fist</a>`,
@@ -2604,20 +2593,6 @@ export const Formats: FormatList = [
 		unbanlist: ['Battle Bond', 'Greninja-Bond', 'Greninja-Ash'],
 	},
 	{
-		name: "[Gen 3] ADV DX OU",
-		mod: 'gen3advdx',
-		ruleset: ['Standard', 'Freeze Clause Mod', 'Data Mod'],
-		banlist: ['Uber', 'Sand Veil', 'Soundproof', 'Assist', 'Baton Pass + Block', 'Baton Pass + Mean Look', 'Baton Pass + Spider Web', 'Smeargle + Ingrain', 'Soul Dew', 'Sand Attack', 'Flash', 'Mud-Slap', 'Kinesis', 'Smokescreen'],
-	},
-	{
-		name: "[Gen 3] ADV DX Doubles",
-		mod: 'gen3advdx',
-		gameType: 'doubles',
-		ruleset: ['Standard', 'Freeze Clause Mod', 'Data Mod', '!Switch Priority Clause Mod'],
-		banlist: ['Uber', 'Quick Claw', 'Soul Dew', 'Explosion', 'Self-Destruct', 'Swagger', 'Sand Attack', 'Flash', 'Mud-Slap', 'Kinesis', 'Smokescreen'],
-		unbanlist: ['Wobbuffet', 'Wynaut'],
-	},
-	{
 		name: "[Gen 3] ADV Tradebacks",
 		mod: 'gen3tradebacks',
 		ruleset: ['Standard', 'Baton Pass Mod', 'One Boost Passer Clause', 'Freeze Clause Mod', 'Data Mod'],
@@ -3936,23 +3911,6 @@ export const Formats: FormatList = [
 		section: "Pet Mods Bonus Formats",
 		column: 3,
 		// name: "petmodsbonusformats",
-	},
-	{
-		name: "[Gen 3] Hoenn Gaiden UU",
-		desc: ["<b>Hoenn Gaiden</b>: A Gen 3 pet mod that aims to devamp Gen 4-8 Pokemon, moves and items into the Gen 3 mechanics."],
-		threads: [
-			`&bullet; <a href="https://www.smogon.com/forums/threads/hoenn-gaiden-pet-mod-of-the-season.3714737/">Hoenn Gaiden on Smogon Forums</a>`,
-		],
-
-		mod: 'gen3uuhoenngaiden',
-		ruleset: ['Standard', 'Data Mod', 'Freeze Clause Mod'],
-		banlist: [
-				'Uber', 'OU', 'UUBL', 'Snow Warning', 'Air Balloon',
-				'Babiri Berry', 'Charti Berry', 'Chilan Berry', 'Chople Berry', 'Coba Berry', 'Colbur Berry',
-				'Haban Berry', 'Kasib Berry', 'Kebia Berry', 'Occa Berry', 'Passho Berry', 'Payapa Berry',
-				'Rindo Berry', 'Roseli Berry', 'Shuca Berry', 'Tanga Berry', 'Wacan Berry', 'Yache Berry',
-		],
-		unbanlist: [],
 	},
 	{
 		name: "[Gen 8] JolteMons Random Battle",
