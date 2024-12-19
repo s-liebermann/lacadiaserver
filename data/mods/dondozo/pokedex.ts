@@ -195,7 +195,7 @@ export const Pokedex: {[k: string]: ModdedSpeciesData} = {
 	kinggiri: {
 		fusion: ['Kingambit', 'Tatsugiri'],
 		num: 15,
-		name: "Kinggiri",
+		name: "Kinggiri2",
 		types: ["Water", "Steel"],
 		baseStats: {hp: 85, atk: 95, def: 90, spa: 90, spd: 90, spe: 70},
 		abilities: {0: "yeah"},
