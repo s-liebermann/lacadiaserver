@@ -22127,6 +22127,10 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1, slicing: 1},
 		multihit: 2,
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Stone Axe", target);
+		},
 		secondaries: [
 			{
 				chance: 100,
@@ -22142,11 +22146,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		],
 		target: "normal",
 		type: "Ground",
-		onPrepareHit(target, source, move) {
-			this.attrLastMove('[still]');
-			this.add('-anim', source, "Mighty Cleave", target);
-		},
-		
 		contestType: "Clever",
 	}
 	

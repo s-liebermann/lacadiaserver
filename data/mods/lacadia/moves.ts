@@ -13,6 +13,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (target.hasType('Grass')) return null;
 			target.addVolatile('leechseed', source);
 		},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Seed Bomb", target);
+		},
 		secondary: null,
 		target: "normal",
 		type: "Grass",
@@ -42,12 +46,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				},
 			},
 		],
+		onPrepareHit: function (target, source) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Stone Axe", target);
+		},
 		target: "normal",
 		type: "Ground",
-		onPrepareHit(target, source, move) {
-			this.attrLastMove('[still]');
-			this.add('-anim', source, "Mighty Cleave", target);
-		},
 		
 		contestType: "Clever",
 	}
