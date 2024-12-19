@@ -4,6 +4,10 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "OU",
 		isModded: true,
 	},
+	verkillion: {
+		tier: "OU",
+		isModded: true,
+	},
 	enkidros: {
 		tier: "OU",
 		isModded: true,
