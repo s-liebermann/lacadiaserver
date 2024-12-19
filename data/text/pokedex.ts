@@ -3767,7 +3767,23 @@ export const PokedexText: {[id: IDEntry]: PokedexText} = {
 	pokestarufopropu2: {
 		name: "Pokestar UFO-PropU2",
 	},
+	springbun: {
+		name: "Springbun",
+	},
+	snapbun: {
+		name: "Snapbun",
+	},
 	faestalk: {
 		name: "Faestalk",
+	},
+	purrluxe: {
+		name: "Purrluxe",
+	},
+	lyonite: {
+		name: "Lyonite",
+	},
+	enkidros: {
+		name: "Enkidros",
 	}
+
 };
