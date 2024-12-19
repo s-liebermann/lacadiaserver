@@ -22147,6 +22147,28 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "normal",
 		type: "Ground",
 		contestType: "Clever",
+	},
+	venomspear: {
+		num: 2002,
+		accuracy: 100,
+		basePower: 60,
+		category: "Special",
+		name: "Venom Spear",
+		shortDesc: "Applies Toxic effect to Opponent",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Poison Tail", target);
+		},
+		secondary: {
+			chance: 100,
+			status: 'tox',
+		},
+		target: "normal",
+		type: "Poison",
+		contestType: "Clever",
 	}
 	
 };
