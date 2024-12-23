@@ -20021,7 +20021,7 @@ export const Pokedex: import('../sim/dex-species').SpeciesDataTable = {
 	// 	eggGroups: ["Field"],
 	// 	changesFrom: "Tortarma-Solar",
 	// 	evos: ["Tortality"],
-	},
+	//},
 	tortality: {
 		num: 2019,
 		name: "Tortality",
