@@ -31,6 +31,14 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	tortality: {
 		tier: "OU",
 		isModded: true
+	},
+	stratoclysm: {
+		tier: "OU",
+		isModded: true
+	},
+	suprion: {
+		tier: "OU",
+		isModded: true
 	}
 
 	

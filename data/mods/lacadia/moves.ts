@@ -76,5 +76,25 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Poison",
 		contestType: "Clever",
-	}
+	},
+	egocrush: {
+		num: 2003,
+		accuracy: 100,
+		basePower: 80,
+		category: "Special",
+		name: "Ego Crush",
+		pp: 15,
+		priority: 0,
+		flags: {protect: 1, mirror: 1, metronome: 1},
+		onEffectiveness(typeMod, target, type) {
+			if (type === 'Psychic') return 1;
+		},
+		secondary: {
+			chance: 10,
+			status: 'frz',
+		},
+		target: "normal",
+		type: "Psychic",
+		contestType: "Beautiful",
+	},
 };
