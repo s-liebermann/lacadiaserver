@@ -50,6 +50,11 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Stone Axe", target);
 		},
+		// onSourceModifySecondaries(secondaries, target, source, move) {
+		// 	if (move.hit < 2) {
+		// 		return secondaries.filter(effect =>  === 'flinch');
+		// 	}
+		// },
 		target: "normal",
 		type: "Ground",
 		
