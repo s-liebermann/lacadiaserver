@@ -83,15 +83,16 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 80,
 		category: "Special",
 		name: "Ego Crush",
+		shortDesc: "Super effective against Psychic Types",
 		pp: 15,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1},
 		onEffectiveness(typeMod, target, type) {
 			if (type === 'Psychic') return 1;
 		},
-		secondary: {
-			chance: 10,
-			status: 'frz',
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Shattered Psyche", target);
 		},
 		target: "normal",
 		type: "Psychic",
