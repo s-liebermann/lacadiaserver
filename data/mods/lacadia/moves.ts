@@ -157,7 +157,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		num: 2006,
 		accuracy: 100,
 		basePower: 75,
-		category: "Status",
+		category: "Special",
 		name: "Agave Shot",
 		shortDesc: "Increases Sp. Atk by 3 Stages but decreases Acc by 1 stage",
 		pp: 10,
