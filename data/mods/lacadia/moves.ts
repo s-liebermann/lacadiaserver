@@ -64,7 +64,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		num: 2002,
 		accuracy: 100,
 		basePower: 60,
-		category: "Special",
+		category: "Physical",
 		name: "Venom Spear",
 		shortDesc: "Applies Toxic effect to Opponent",
 		pp: 10,
@@ -103,4 +103,53 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Psychic",
 		contestType: "Beautiful",
 	},
+	freezingtempo: {
+		num: 2004,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Freezing Tempo",
+		pp: 10,
+		priority: 0,
+		flags: {snatch: 1, dance: 1, metronome: 1},
+		boosts: {
+			spa: 1,
+			spe: 1,
+		},
+		onHit(target, source) {
+			source.addVolatile('lockon', target);
+			this.add('-activate', source, 'move: Lock-On', '[of] ' + target);
+		},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Dragon Dance", target);
+		},
+		secondary: null,
+		target: "self",
+		type: "Ice",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cool",
+	},
+	icyharpoon: {
+		num: 2005,
+		accuracy: 100,
+		basePower: 90,
+		category: "Physical",
+		name: "Icy Harpoon",
+		shortDesc: "Has a 30% chance of badly poisoning the target",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Glacial Lance", target);
+		},
+		secondary: {
+			chance: 30,
+			status: 'tox',
+		},
+		target: "normal",
+		type: "Ice",
+		contestType: "Clever",
+	}
 };
