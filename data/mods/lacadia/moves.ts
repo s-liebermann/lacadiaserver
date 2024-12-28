@@ -113,10 +113,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, dance: 1, metronome: 1},
-		boosts: {
+		self: {
+			boosts: {
 			spa: 1,
 			spe: 1,
 		},
+	    },
 		onHit(target, source) {
 			source.addVolatile('lockon', target);
 			this.add('-activate', source, 'move: Lock-On', '[of] ' + target);
@@ -126,7 +128,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			this.add('-anim', source, "Dragon Dance", target);
 		},
 		secondary: null,
-		target: "self",
+		target: "normal",
 		type: "Ice",
 		zMove: {effect: 'clearnegativeboost'},
 		contestType: "Cool",
