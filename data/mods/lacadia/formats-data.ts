@@ -32,6 +32,18 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "OU",
 		isModded: true
 	},
+	snochu: {
+		tier: "OU",
+		isModded: true,
+	},
+	baleet: {
+		tier: "OU",
+		isModded: true,
+	},
+	cryoconda: {
+		tier: "OU",
+		isModded: true,
+	},
 	stratoclysm: {
 		tier: "OU",
 		isModded: true
