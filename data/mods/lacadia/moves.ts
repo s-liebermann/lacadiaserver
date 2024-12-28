@@ -109,6 +109,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 0,
 		category: "Status",
 		name: "Freezing Tempo",
+		shortDesc: "Increases Sp. Atk and Speed by 1 stage. Next move is guaranteed to hit.",
 		pp: 10,
 		priority: 0,
 		flags: {snatch: 1, dance: 1, metronome: 1},
@@ -151,5 +152,33 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Ice",
 		contestType: "Clever",
+	},
+	agaveshot: {
+		num: 2006,
+		accuracy: 100,
+		basePower: 75,
+		category: "Status",
+		name: "Agave Shot",
+		shortDesc: "Increases Sp. Atk by 3 Stages but decreases Acc by 1 stage",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		secondary: {
+			chance: 100,
+			self: {
+				boosts: {
+					spa: 3,
+					accuracy: -1
+				},
+			},
+		},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Matcha Gotcha", target);
+		},
+		target: "normal",
+		type: "Grass",
+		zMove: {effect: 'clearnegativeboost'},
+		contestType: "Cool",
 	}
 };
