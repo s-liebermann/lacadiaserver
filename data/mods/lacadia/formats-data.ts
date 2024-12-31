@@ -51,7 +51,17 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	suprion: {
 		tier: "OU",
 		isModded: true
-	}
-
-	
+	},
+	aggresso: {
+		tier: "OU",
+		isModded: true
+	},
+	citradilly: {
+		tier: "OU",
+		isModded: true
+	},
+	krabutops: {
+		tier: "OU",
+		isModded: true
+	},	
 };

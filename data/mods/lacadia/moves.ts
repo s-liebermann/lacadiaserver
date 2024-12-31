@@ -192,30 +192,22 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, bypasssub: 1, metronome: 1},
-		onHit(target, source, move) {
-			const success = this.boost({atk: -1, spa: -1}, target, source);
-			if (!success && !target.hasAbility('mirrorarmor')) {
-				delete move.selfSwitch;
-			}
-		},
 		volatileStatus: 'encore',
 		condition: {
 			duration: 3,
 			noCopy: true, // doesn't get copied by Z-Baton Pass
 			onStart(target) {
 				let move: Move | ActiveMove | null = target.lastMove;
-				if (!move || target.volatiles['dynamax']) return false;
-
-				if (move.isMax && move.baseMove) move = this.dex.moves.get(move.baseMove);
 				const moveIndex = target.moves.indexOf(move.id);
-				if (move.isZ || move.flags['failencore'] || !target.moveSlots[moveIndex] || target.moveSlots[moveIndex].pp <= 0) {
+				if (!move || move.isZ || move.flags['failencore'] || !target.moveSlots[moveIndex] || target.moveSlots[moveIndex].pp <= 0) {
 					// it failed
-					return false;
 				}
+				else {
 				this.effectState.move = move.id;
 				this.add('-start', target, 'Encore');
 				if (!this.queue.willMove(target)) {
 					this.effectState.duration++;
+				}
 				}
 			},
 			onOverrideAction(pokemon, target, move) {
@@ -242,6 +234,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 					}
 				}
 			},
+			onPrepareHit(target, source, move) {
+				this.attrLastMove('[still]');
+				this.add('-anim', source, "Encore", target);
+			},
 		},
 		selfSwitch: true,
 		secondary: null,
@@ -253,22 +249,21 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		num: 2008,
 		accuracy: 100,
 		basePower: 85,
-		basePowerCallback(pokemon, target, move) {
-			if (pokemon.hasitem('oranberry') || pokemon.hasitem('sitrusberry')) {
-				this.debug("BP doubled for berry");
-				return move.basePower * 2;
-			}
-			return move.basePower;
-		},
-		onModifyMove(move, pokemon){
-			if (pokemon.hasitem('oranberry') || pokemon.hasitem('sitrusberry')) {
-				this.debug("Stat change doubled for berry");
+		onModifyMove(move, source, pokemon){
+			
+			const item = source.getItem();
+			if (source.hasItem('oranberry') || source.hasItem('sitrusberry')) {
+				move.secondaries = [];
+				this.hint(`${move.name}'s BP and Sp. Def drop doubled for berry.`)
 				move.secondaries.push({
 					chance: 100,
 					boosts: {
 						spd: -2,
 					},
 				});
+				move.basePower = move.basePower * 2;
+				source.eatItem();
+				if (item.onEat) source.ateBerry = true;
 			}
 		},
 		category: "Special",
@@ -279,10 +274,8 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {protect: 1, reflectable: 1, mirror: 1},
 		secondary: {
 			chance: 100,
-			self: {
-				boosts: {
-					spd: -1
-				},
+			boosts: {
+				spd: -1
 			},
 		},
 		onPrepareHit(target, source, move) {
