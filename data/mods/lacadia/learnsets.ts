@@ -98,6 +98,7 @@ export const Learnsets: {[speciesid: string]: ModdedLearnsetData} = {
 			agility: ["9M"],
 			attract: ["8M", "7M"],
 			beatup: ["8M"],
+			blastburn: ["9M"],
 			bodyslam: ["9M"],
 			breakingswipe: ["9M", "8M"],
 			burningjealousy: ["9M"],
