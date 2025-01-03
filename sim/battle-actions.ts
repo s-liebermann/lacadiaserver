@@ -1907,7 +1907,7 @@ export class BattleActions {
 	runMegaEvoY?: (this: BattleActions, pokemon: Pokemon) => boolean;
 
 	canTerastallize(pokemon: Pokemon) {
-		if (pokemon.getItem().zMove || pokemon.canMegaEvo || this.dex.gen !== 9) {
+		if (pokemon.getItem().zMove || pokemon.canMegaEvo || this.dex.gen !== 9 || this.dex.currentMod == 'lacadia') {
 			return null;
 		}
 		return pokemon.teraType;
@@ -1943,6 +1943,32 @@ export class BattleActions {
 		}
 		this.battle.runEvent('AfterTerastallization', pokemon);
 	}
+
+	canHyper(pokemon: Pokemon)
+	{
+		if(this.dex.currentMod == 'lacadia') 
+			return pokemon.hyperType;
+	}
+
+	 hyper(pokemon: Pokemon) {
+		const type = pokemon.teraType;
+		this.battle.add('-terastallize', pokemon, type);
+		pokemon.terastallized = type;
+		for (const ally of pokemon.side.pokemon) {
+			ally.canTerastallize = null;
+		}
+		pokemon.addedType = '';
+		pokemon.knownType = true;
+		pokemon.apparentType = type;
+		// if (pokemon.species.baseSpecies === 'Ogerpon') {
+		// 	const tera = pokemon.species.id === 'ogerpon' ? 'tealtera' : 'tera';
+		// 	pokemon.formeChange(pokemon.species.id + tera, null, true);
+		// }
+		// if (pokemon.species.name === 'Terapagos-Terastal' && type === 'Stellar') {
+		// 	pokemon.formeChange('Terapagos-Stellar', null, true);
+		// }
+		this.battle.runEvent('AfterHyper', pokemon);
+	  }
 
 	// #endregion
 }

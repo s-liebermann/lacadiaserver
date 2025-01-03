@@ -108,6 +108,7 @@ export interface PokemonSet {
 	 * Tera Type
 	 */
 	teraType?: string;
+	hyperType?: string;
 }
 
 export const Teams = new class Teams {

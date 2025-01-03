@@ -485,6 +485,7 @@ namespace RandomTeamsTypes {
 		dynamaxLevel?: number;
 		gigantamax?: boolean;
 		teraType?: string;
+		hyperType?: string;
 		role?: Role;
 	}
 	export interface RandomFactorySet {
@@ -504,12 +505,14 @@ namespace RandomTeamsTypes {
 		gigantamax?: boolean;
 		wantsTera?: boolean;
 		teraType?: string;
+		hyperType?: string;
 	}
 	export interface RandomSetData {
 		role: Role;
 		movepool: string[];
 		abilities?: string[];
 		teraTypes?: string[];
+		hyperTypes?: string[];
 		preferredTypes?: string[];
 	}
 	export interface RandomSpeciesData {

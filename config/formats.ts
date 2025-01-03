@@ -27,7 +27,7 @@ export const Formats: FormatList = [
 		// name: "gen9petmods",
 	},
 	{
-		name: "[Gen 9] Lacadia",
+		name: "[Gen 10] Lacadia",
 		mod: 'lacadia',
 		desc: `lacadia`,
 		ruleset: ['Standard NatDex', 'OHKO Clause', 'Evasion Moves Clause', 'Species Clause', 'Dynamax Clause', 'Data Mod', 'Sleep Clause Mod', 'Z-Move Clause', /* 'Mega Data Mod' */],
