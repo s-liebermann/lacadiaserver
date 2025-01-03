@@ -28,7 +28,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 40,
 		category: "Physical",
 		name: "Crushing Cleave",
-		shortDesc: "Hits twice, lowers defense and special defense",
+		shortDesc: "Hits twice, first hit lowers defense and second hit lowers special defense",
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, mirror: 1, metronome: 1, slicing: 1},
@@ -39,13 +39,29 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 				boosts: {
 					def: -1,
 				},
-			}, {
-				chance: 100,
-				boosts: {
-					spd: -1,
-				},
 			},
 		],
+		basePowerCallback(pokemon, target, move) {
+			if (move.hit == 1) {
+				move.secondaries = [];
+				move.secondaries.push({
+					chance: 100,
+					boosts: {
+						def: -1,
+					}
+				})
+			}
+			else if (move.hit == 2) {
+				move.secondaries = [];
+				move.secondaries.push({
+					chance: 100,
+					boosts: {
+						spd: -1,
+					}
+				})
+			}
+			return 40;
+		},
 		onPrepareHit: function (target, source) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Stone Axe", target);
@@ -189,6 +205,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 0,
 		category: "Status",
 		name: "Final Act",
+		shortDesc: "Switches the user out, attempts to set Encore",
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1, sound: 1, bypasssub: 1, metronome: 1},
@@ -286,5 +303,52 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Grass",
 		contestType: "Cool",
 	},
-
+	bushidoflurry: {
+		num: 2009,
+		accuracy: 100,
+		basePower: 18,
+		multihit: 5,
+		category: "Physical",
+		name: "Bushido Flurry",
+		shortDesc: "Always results in a critical hit. Hits 5 times.",
+		pp: 10,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, slicing: 1},
+		willCrit: true,
+		secondary: null,
+		target: "normal",
+		type: "Steel",
+	},
+	icesplinters: {
+		num: 2010,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Ice Splinters",
+		shortDesc: "Hurts foe on switch-in. Factors Ice weakness",
+		pp: 20,
+		priority: 0,
+		flags: {reflectable: 1, metronome: 1, mustpressure: 1},
+		sideCondition: 'icesplinters',
+		condition: {
+			onSideStart(side) {
+				this.add('-sidestart', side, 'move: Ice Splinters');
+			},
+			onEntryHazard(pokemon) {
+				if (pokemon.hasItem('heavydutyboots')) return;
+				// Ice Face and Disguise correctly get typed damage from Stealth Rock
+				// because Stealth Rock bypasses Substitute.
+				// They don't get typed damage from Steelsurge because Steelsurge doesn't,
+				// so we're going to test the damage of a Steel-type Stealth Rock instead.
+				const iceHazard = this.dex.getActiveMove('Stealth Rock');
+				iceHazard.type = 'Ice';
+				const typeMod = this.clampIntRange(pokemon.runEffectiveness(iceHazard), -6, 6);
+				this.damage(pokemon.maxhp * Math.pow(2, typeMod) / 8);
+			},
+		},
+		secondary: null,
+		target: "foeSide",
+		type: "Ice",
+		contestType: "Cool",
+	},
 };

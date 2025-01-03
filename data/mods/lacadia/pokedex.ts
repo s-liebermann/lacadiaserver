@@ -69,7 +69,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		name: "Verkillion",
 		types: ["Fire", "Poison"],
 		genderRatio: {M: 0.875, F: 0.125},
-		baseStats: {hp: 70, atk: 100, def: 65, spa: 120, spd: 70, spe: 110},
+		baseStats: {hp: 70, atk: 120, def: 65, spa: 100, spd: 70, spe: 110},
 		abilities: {0: "Blaze", H: "Merciless"},
 		heightm: 0.3,
 		weightkg: 5,
