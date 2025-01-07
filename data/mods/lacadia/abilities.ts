@@ -75,7 +75,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	stoic: {
 		name: "Stoic",
-		shortDesc: "Immune to attack drops, burns, and flinches";
+		shortDesc: "Immune to attack drops, burns, and flinches",
 		num: 2004,
 		onTryBoost(boost, target, source, effect) {
 			if (source && target === source) return;
@@ -105,5 +105,32 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 			if (status.id === 'flinch') return null;
 		},
 		flags: {isHyper: 1},
+	},
+	grippingpresence: {
+		name: 'Gripping Presence',
+		shortDesc: 'Immune to pivot moves and blocks switch effect',
+		num: 2005,
+		flags: {isHyper: 1},
+		onTryHitPriority: 1,
+		onTryHit(target, source, move) {
+			if (target !== source && move.selfSwitch) {
+				this.add('-immune', target, '[from] ability: Gripping Presence');
+				return null;
+			}
+		},
+	},
+	unforgiving: {
+		name: 'Unforgiving',
+		shortDesc: 'All Pokemon are given the Heal Block effect when user is switched in',
+		num: 2006,
+		flags: {isHyper: 1},
+		onPreStart(pokemon)
+		{
+			for (const target of this.getAllActive()) {
+				target.addVolatile('healblock', this.effectState.target);
+			}
+		}
 	}
+
+
 }

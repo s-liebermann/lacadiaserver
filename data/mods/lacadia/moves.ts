@@ -314,6 +314,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		pp: 10,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, punch: 1, slicing: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Sacred Sword", target);
+		},
 		willCrit: true,
 		secondary: null,
 		target: "normal",

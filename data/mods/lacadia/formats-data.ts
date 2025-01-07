@@ -12,6 +12,10 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "OU",
 		isModded: true,
 	},
+	goosassin: {
+		tier: "OU",
+		isModded: true,
+	},
 	rocadocio: {
 		tier: "OU",
 		isModded: true,
