@@ -130,6 +130,56 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				target.addVolatile('healblock', this.effectState.target);
 			}
 		}
+	},
+	draconicgrowth: {
+		name: 'Draconic Growth',
+		shortDesc: 'Power of draining moves, leech seed are doubled',
+		num: 2007,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.drain) {
+				return this.chainModify(2);
+			}
+		},
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.drain) {
+				return this.chainModify(2);
+			}
+		},
+		onSourceDamage(damage, target, source, effect)
+		{
+			if (effect.id == 'leechseed') {
+				damage = damage * 2;
+			}
+		}
+		// onResidual(target, source, effect) {
+		// 	if (effect.id == 'leechseed') {
+		// 		this.damage(pokemon.baseMaxhp / (pokemon.hasType(['Water', 'Steel']) ? 4 : 8));
+		// 	}
+		// }
+	},
+	noblepresentation: {
+		name: 'Noble Presentation',
+		shortDesc: 'Raises Defense, Sp. Defense, and Speed when a status condition is successfully inflicted',
+		num: 2008,
+		onSourceSetStatus(status, target, source, effect)
+		{
+			if (['psn', 'brn', 'frz', 'par', 'tox', 'slp'].includes(status.id)) {
+				this.boost({def: 1, spd: 1, spe: 1}, source, source, this.effect);
+			}
+		}
+	},
+	vengefuldrive: {
+		name: 'Vengeful Drive',
+		shortDesc: 'Users attacks always result in critical hits when target has lowered stats',
+		num: 2009,
+		onModifyCritRatio(critRatio, source, target) {
+			let i: BoostID;
+			for (i in target.boosts) {
+				if (target.boosts[i]! < 0) {
+					return 5
+				}
+			}
+		},
 	}
 
 
