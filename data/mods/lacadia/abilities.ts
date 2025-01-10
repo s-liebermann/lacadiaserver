@@ -37,7 +37,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	pollyanna: {
 		name: "Pollyanna",
-		shortDesc: "Immune to Dark type moves, raises Sp. Atk by 1 stage if hit",
+		shortDesc: "(Hyper) Immune to Dark type moves, raises Sp. Atk by 1 stage if hit",
 		num: 2002,
 		onTryHitPriority: 1,
 		onTryHit(target, source, move) {
@@ -58,7 +58,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	overload: {
 		name: "Overload",
-		shortDesc: "Skips charge and recharge turns for moves",
+		shortDesc: "(Hyper) Skips charge and recharge turns for moves",
 		num: 2003,
 		onChargeMove(pokemon, target, move) {
 			return false;
@@ -75,7 +75,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	stoicism: {
 		name: "Stoicism",
-		shortDesc: "Immune to attack drops, burns, and flinches",
+		shortDesc: "(Hyper) Immune to attack drops, burns, and flinches",
 		num: 2004,
 		onTryBoost(boost, target, source, effect) {
 			if (source && target === source) return;
@@ -108,7 +108,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	lockdown: {
 		name: 'Lockdown',
-		shortDesc: 'Immune to pivot moves and blocks switch effect',
+		shortDesc: '(Hyper) Immune to pivot moves and blocks switch effect',
 		num: 2005,
 		flags: {isHyper: 1},
 		onTryHitPriority: 1,
@@ -121,7 +121,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	withering: {
 		name: 'Withering',
-		shortDesc: 'All Pokemon are given the Heal Block effect when user is switched in',
+		shortDesc: '(Hyper) All Pokemon are given the Heal Block effect when user is switched in',
 		num: 2006,
 		flags: {isHyper: 1},
 		onPreStart(pokemon)
