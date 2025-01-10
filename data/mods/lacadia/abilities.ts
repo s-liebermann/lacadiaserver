@@ -1,6 +1,6 @@
 export const Abilities: {[k: string]: ModdedAbilityData} = {
-	apocalypticleech: {
-        name: "Apocalyptic Leech",
+	parasitoid: {
+        name: "Parasitoid",
         shortDesc: "The user heals 25% of the damage it deals with direct attacks",
         num: 2000,
 		onModifyMovePriority: -2,
@@ -56,8 +56,8 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		},
 		flags: {isHyper: 1},
 	},
-	unyieldingdrive: {
-		name: "Unyielding Drive",
+	overload: {
+		name: "Overload",
 		shortDesc: "Skips charge and recharge turns for moves",
 		num: 2003,
 		onChargeMove(pokemon, target, move) {
@@ -73,8 +73,8 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		},
 		flags: {isHyper: 1},
 	},
-	stoic: {
-		name: "Stoic",
+	stoicism: {
+		name: "Stoicism",
 		shortDesc: "Immune to attack drops, burns, and flinches",
 		num: 2004,
 		onTryBoost(boost, target, source, effect) {
@@ -85,19 +85,19 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				showMsg = true;
 			}
 			if (showMsg && !(effect as ActiveMove).secondaries) {
-				this.add("-fail", target, "unboost", "[from] ability: Stoic", "[of] " + target);
+				this.add("-fail", target, "unboost", "[from] ability: Stoicism", "[of] " + target);
 			}
 		},
 		onUpdate(pokemon) {
 			if (pokemon.status === 'brn') {
-				this.add('-activate', pokemon, 'ability: Stoic');
+				this.add('-activate', pokemon, 'ability: Stoicism');
 				pokemon.cureStatus();
 			}
 		},
 		onSetStatus(status, target, source, effect) {
 			if (status.id !== 'brn') return;
 			if ((effect as Move)?.status) {
-				this.add('-immune', target, '[from] ability: Stoic');
+				this.add('-immune', target, '[from] ability: Stoicism');
 			}
 			return false;
 		},
@@ -106,21 +106,21 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		},
 		flags: {isHyper: 1},
 	},
-	grippingpresence: {
-		name: 'Gripping Presence',
+	lockdown: {
+		name: 'Lockdown',
 		shortDesc: 'Immune to pivot moves and blocks switch effect',
 		num: 2005,
 		flags: {isHyper: 1},
 		onTryHitPriority: 1,
 		onTryHit(target, source, move) {
 			if (target !== source && move.selfSwitch) {
-				this.add('-immune', target, '[from] ability: Gripping Presence');
+				this.add('-immune', target, '[from] ability: Lockdown');
 				return null;
 			}
 		},
 	},
-	unforgiving: {
-		name: 'Unforgiving',
+	withering: {
+		name: 'Withering',
 		shortDesc: 'All Pokemon are given the Heal Block effect when user is switched in',
 		num: 2006,
 		flags: {isHyper: 1},
@@ -131,8 +131,8 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 			}
 		}
 	},
-	draconicgrowth: {
-		name: 'Draconic Growth',
+	verdanthunger: {
+		name: 'Verdant Hunger',
 		shortDesc: 'Power of draining moves, leech seed are doubled',
 		num: 2007,
 		onModifyAtk(atk, attacker, defender, move) {
@@ -157,8 +157,8 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		// 	}
 		// }
 	},
-	noblepresentation: {
-		name: 'Noble Presentation',
+	noblebearing: {
+		name: 'Noble Bearing',
 		shortDesc: 'Raises Defense, Sp. Defense, and Speed when a status condition is successfully inflicted',
 		num: 2008,
 		onSourceSetStatus(status, target, source, effect)
@@ -166,10 +166,10 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 			if (['psn', 'brn', 'frz', 'par', 'tox', 'slp'].includes(status.id)) {
 				this.boost({def: 1, spd: 1, spe: 1}, source, source, this.effect);
 			}
-		}
+		}   
 	},
-	vengefuldrive: {
-		name: 'Vengeful Drive',
+	ruthless: {
+		name: 'Ruthless',
 		shortDesc: 'Users attacks always result in critical hits when target has lowered stats',
 		num: 2009,
 		onModifyCritRatio(critRatio, source, target) {
@@ -180,7 +180,49 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				}
 			}
 		},
-	}
+	},
+	// backstabber: {
+	// 	name: 'Backstabber',
+	// 	shortDesc: 'If target switches out, hits them with readied attack before switch occurs',
+	// 	num: 2010,
+	// 	onTryHit(target, pokemon) {
+	// 		target.side.removeSideCondition('pursuit');
+	// 	},
+	// 	condition: {
+	// 		duration: 1,
+	// 		onBeforeSwitchOut(pokemon) {
+	// 			this.debug('Pursuit start');
+	// 			let alreadyAdded = false;
+	// 			pokemon.removeVolatile('destinybond');
+	// 			for (const source of this.effectState.sources) {
+	// 				if (!source.isAdjacent(pokemon) || !this.queue.cancelMove(source) || !source.hp) continue;
+	// 				if (!alreadyAdded) {
+	// 					this.add('-activate', pokemon, 'move: Pursuit');
+	// 					alreadyAdded = true;
+	// 				}
+	// 				// Run through each action in queue to check if the Pursuit user is supposed to Mega Evolve this turn.
+	// 				// If it is, then Mega Evolve before moving.
+	// 				if (source.canMegaEvo || source.canUltraBurst || source.canTerastallize || source.canHyper) {
+	// 					for (const [actionIndex, action] of this.queue.entries()) {
+	// 						if (action.pokemon === source) {
+	// 							if (action.choice === 'megaEvo') {
+	// 								this.actions.runMegaEvo(source);
+	// 							} else if (action.choice === 'terastallize') {
+	// 								// Also a "forme" change that happens before moves, though only possible in NatDex
+	// 								this.actions.terastallize(source);
+	// 							} else {
+	// 								continue;
+	// 							}
+	// 							this.queue.list.splice(actionIndex, 1);
+	// 							break;
+	// 						}
+	// 					}
+	// 				}
+	// 				this.actions.runMove('pursuit', source, source.getLocOf(pokemon));
+	// 			}
+	// 		},
+	// 	},
+	// }
 
 
 }
