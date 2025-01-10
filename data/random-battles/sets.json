@@ -1,0 +1,54 @@
+{
+    "faestalk": {
+        "level": 100,
+        "sets": [
+            {
+                "role": "AV Pivot",
+                "movepool": ["Giga Drain", "Bean Barrage", "Moonblast", "Dragon Pulse"],
+                "abilities": ["Dragon's Maw"],
+                "hypers": ["Draconic Growth"]
+            }
+        ]
+    },
+    "verkillion": {
+        "level": 100,
+        "sets": [
+            {
+                "role": "Setup Sweeper",
+                "movepool": ["Dragon Dance", "Venom Spear", "Fire Lash", "Dragon Claw", "Substitute"],
+                "abilities": ["Merciless"],
+                "hypers": ["Noble Presentation"]
+            },
+            {
+                "role": "Fast Atacker",
+                "movepool": ["Flare Blitz", "Gunk Shot", "Fire Lash", "Dragon Claw", "Knock Off"],
+                "abilities": ["Blaze"],
+                "hypers": ["Noble Presentation"]
+            },
+            {
+                "role": "Utility",
+                "movepool": ["Venom Spear", "Glare", "Knock Off", "Fire Blast"],
+                "abilities": ["Merciless"],
+                "hypers": ["Noble Presentation"]
+            }
+        ]
+    },
+    "enkidros": {
+        "level": 100,
+        "sets": [
+            {
+                "role": "AV Pivot",
+                "movepool": ["Crushing Cleave", "Liquidation", "Stone Axe", "Hammer Arm", "Ice Punch", "Flip Turn", "Knock Off"],
+                "abilities": ["Stamina"],
+                "hypers": ["Vengeful Drive"]
+            },
+            {
+                "role": "Wallbreaker",
+                "movepool": ["Crushing Cleave", "Liquidation", "Hammer Arm", "Ice Punch"],
+                "abilities": ["Torrent"],
+                "hypers": ["Vengeful Drive"]
+            }
+        ]
+    }
+   
+}
