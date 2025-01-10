@@ -92,7 +92,7 @@ export interface FieldAction {
 /** A generic action done by a single pokemon */
 export interface PokemonAction {
 	/** action type */
-	choice: 'megaEvo' | 'megaEvoX' | 'megaEvoY' | 'shift' | 'runPrimal' | 'runSwitch' | 'event' | 'runUnnerve' | 'runDynamax' | 'terastallize';
+	choice: 'megaEvo' | 'megaEvoX' | 'megaEvoY' | 'shift' | 'runPrimal' | 'runSwitch' | 'event' | 'runUnnerve' | 'runDynamax' | 'terastallize' | 'hyper';
 	/** priority of the action (lower first) */
 	priority: number;
 	/** speed of pokemon doing action (higher first if priority tie) */
@@ -184,6 +184,7 @@ export class BattleQueue {
 				runDynamax: 105,
 				terastallize: 106,
 				priorityChargeMove: 107,
+				hyper: 108,
 
 				shift: 200,
 				// default is 200 (for moves)
@@ -227,6 +228,12 @@ export class BattleQueue {
 				if (action.terastallize && !action.pokemon.terastallized) {
 					actions.unshift(...this.resolveAction({
 						choice: 'terastallize',
+						pokemon: action.pokemon,
+					}));
+				}
+				if (action.hyper && !action.pokemon.hyper) {
+					actions.unshift(...this.resolveAction({
+						choice: 'hyper',
 						pokemon: action.pokemon,
 					}));
 				}

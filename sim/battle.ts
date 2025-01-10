@@ -2565,6 +2565,9 @@ export class Battle {
 		case 'terastallize':
 			this.actions.terastallize(action.pokemon);
 			break;
+		case 'hyper':
+			this.actions.hyper(action.pokemon);
+			break;
 		case 'beforeTurnMove':
 			if (!action.pokemon.isActive) return false;
 			if (action.pokemon.fainted) return false;

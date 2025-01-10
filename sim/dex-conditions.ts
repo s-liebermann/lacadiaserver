@@ -11,6 +11,7 @@ export interface EventMethods {
 	onAfterSubDamage?: MoveEventMethods['onAfterSubDamage'];
 	onAfterSwitchInSelf?: (this: Battle, pokemon: Pokemon) => void;
 	onAfterTerastallization?: (this: Battle, pokemon: Pokemon) => void;
+	onAfterHyper?: (this: Battle, pokemon: Pokemon) => void;
 	onAfterUseItem?: (this: Battle, item: Item, pokemon: Pokemon) => void;
 	onAfterTakeItem?: (this: Battle, item: Item, pokemon: Pokemon) => void;
 	onAfterBoost?: (this: Battle, boost: SparseBoostsTable, target: Pokemon, source: Pokemon, effect: Effect) => void;

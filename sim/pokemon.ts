@@ -1144,6 +1144,8 @@ export class Pokemon {
 		if (this.battle.gen === 9) {
 			entry.teraType = this.teraType;
 			entry.terastallized = this.terastallized || '';
+			entry.hyperType = this.hyperType;
+			entry.hypered = this.hypered || '';
 		}
 		return entry;
 	}

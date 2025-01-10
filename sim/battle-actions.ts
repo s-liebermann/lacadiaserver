@@ -1947,19 +1947,17 @@ export class BattleActions {
 	canHyper(pokemon: Pokemon)
 	{
 		if(this.dex.currentMod == 'lacadia') 
-			return pokemon.hyperType;
+			return pokemon.hyperType
+		else return null;
 	}
 
 	 hyper(pokemon: Pokemon) {
-		const type = pokemon.teraType;
-		this.battle.add('-terastallize', pokemon, type);
-		pokemon.terastallized = type;
+		const hyper = pokemon.hyperType;
+		this.battle.add('-hyper', pokemon, hyper);
+		pokemon.hypered = hyper;
 		for (const ally of pokemon.side.pokemon) {
-			ally.canTerastallize = null;
+			ally.canHyper = null;
 		}
-		pokemon.addedType = '';
-		pokemon.knownType = true;
-		pokemon.apparentType = type;
 		// if (pokemon.species.baseSpecies === 'Ogerpon') {
 		// 	const tera = pokemon.species.id === 'ogerpon' ? 'tealtera' : 'tera';
 		// 	pokemon.formeChange(pokemon.species.id + tera, null, true);

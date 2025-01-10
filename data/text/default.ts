@@ -37,6 +37,7 @@ export const DefaultText: {[id: IDEntry]: DefaultText} = {
 		zPower: "  [POKEMON] surrounded itself with its Z-Power!",
 		zBroken: "  [POKEMON] couldn't fully protect itself and got hurt!",
 		terastallize: "  [POKEMON] has Terastallized into the [TYPE]-type!", // filler
+		hyper: " [POKEMON] has Hypered and gained [HYPER]",
 
 		// in case the different default messages didn't make it obvious, the difference
 		// is that the `cant` message REPLACES "Pokemon used Move!", while the `fail`
