@@ -269,7 +269,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		onModifyMove(move, source, pokemon){
 			
 			const item = source.getItem();
-			if (source.hasItem('oranberry') || source.hasItem('sitrusberry')) {
+			if (item.isBerry) {
 				move.secondaries = [];
 				this.hint(`${move.name}'s BP and Sp. Def drop doubled for berry.`)
 				move.secondaries.push({
