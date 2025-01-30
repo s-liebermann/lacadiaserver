@@ -270,14 +270,14 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			
 			const item = source.getItem();
 			if (item.isBerry) {
-				move.secondaries = [];
-				this.hint(`${move.name}'s BP and Sp. Def drop doubled for berry.`)
-				move.secondaries.push({
-					chance: 100,
-					boosts: {
-						spd: -2,
-					},
-				});
+				// move.secondaries = [];
+				// this.hint(`${move.name}'s BP and Sp. Def drop doubled for berry.`)
+				// move.secondaries.push({
+				// 	chance: 100,
+				// 	boosts: {
+				// 		spd: -2,
+				// 	},
+				// });
 				move.basePower = move.basePower * 2;
 				source.eatItem();
 				if (item.onEat) source.ateBerry = true;
@@ -285,16 +285,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		},
 		category: "Special",
 		name: "Zest Spray",
-		shortDesc: "Has a 100% chance to lower the target's Sp. Def by 1 stage. If user is holding an Oran or Sitrus berry, berry is consumed and power is doubled.",
+		shortDesc: "If user is holding a berry, berry is consumed and power is doubled.",
 		pp: 10,
 		priority: 0,
 		flags: {protect: 1, reflectable: 1, mirror: 1},
-		secondary: {
-			chance: 100,
-			boosts: {
-				spd: -1
-			},
-		},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
 			this.add('-anim', source, "Spicy Extract", target);
@@ -306,7 +300,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 	bushidoflurry: {
 		num: 2009,
 		accuracy: 100,
-		basePower: 18,
+		basePower: 10,
 		multihit: 5,
 		category: "Physical",
 		name: "Bushido Flurry",
