@@ -244,6 +244,9 @@ export class Pokemon {
 	syrupTriggered: boolean;
 	stellarBoostedTypes: string[];
 
+	//Lacadia
+	caffeinated: boolean;
+
 	/** Have this pokemon's Start events run yet? (Start events run every switch-in) */
 	isStarted: boolean;
 	duringMove: boolean;
@@ -463,6 +466,7 @@ export class Pokemon {
 		this.shieldBoost = false;
 		this.syrupTriggered = false;
 		this.stellarBoostedTypes = [];
+		this.caffeinated = false;
 		this.isStarted = false;
 		this.duringMove = false;
 

@@ -56,11 +56,11 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "OU",
 		isModded: true
 	},
-	aggresso: {
+	espressurge: {
 		tier: "OU",
 		isModded: true
 	},
-	citradilly: {
+	citradily: {
 		tier: "OU",
 		isModded: true
 	},

@@ -240,7 +240,25 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				}
 			}
 		},
+	},
+	caffeinerush: {
+		name: "Caffeine Rush",
+		shortDesc: "The Pokemon's Speed is raised by 6 stages and restores 25% of its HP when it reaches 1/2 or less of its max HP. Once per battle.",
+		num: 2012,
+		onAfterMoveSecondary(target, source, move) {
+			if (target.caffeinated) return;
+			if (!source || source === target || !target.hp || !move.totalDamage) return;
+			const lastAttackedBy = target.getLastAttackedBy();
+			if (!lastAttackedBy) return;
+			const damage = move.multihit && !move.smartTarget ? move.totalDamage : lastAttackedBy.damage;
+			if (target.hp <= target.maxhp / 2 && target.hp + damage > target.maxhp / 2) {
+				target.caffeinated = true;
+				this.boost({spe: 6}, target, target);
+				this.heal(target.baseMaxhp / 4);
+			}
+		},
 	}
+	
 
 
 }
