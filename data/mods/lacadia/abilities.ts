@@ -222,7 +222,25 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	// 			}
 	// 		},
 	// 	},
-	// }
+	// },
+	balancesurge: {
+		name: "Balance Surge",
+		shortDesc: "Fire moves are boosted by 20% in Snow, Ice moves are boosted by 20% in Sun.",
+		num: 2011,
+		onBasePowerPriority: 21,
+		onBasePower(basePower, attacker, defender, move) {
+			if (this.field.isWeather('sun')) {
+				if (move.type === 'Ice') {
+					return this.chainModify([4916, 4096]);
+				}
+			}
+			if (this.field.isWeather('snow')) {
+				if (move.type === 'fire') {
+					return this.chainModify([4916, 4096]);
+				}
+			}
+		},
+	}
 
 
 }
