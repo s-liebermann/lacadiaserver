@@ -355,6 +355,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 140,
 		category: "Physical",
 		name: "Power Scale",
+		shortDesc: "User takes 1/2 of damage dealt as recoil. Move is the type of this Pokemon's secondary type.",
 		pp: 5,
 		priority: 0,
 		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},

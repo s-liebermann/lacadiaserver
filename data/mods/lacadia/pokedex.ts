@@ -565,7 +565,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		types: ["Normal", "Ghost"],
 		genderRatio: {M: 0.5, F: 0.50},
 		baseStats: {hp: 83, atk: 108, def: 61, spa: 58, spd: 57, spe: 46},
-		abilities: {0: "Schrödinger", H: "Run Away"},
+		abilities: {0: "Schrodinger", H: "Run Away"},
 		heightm: 0.3,
 		weightkg: 5,
 		color: "White",

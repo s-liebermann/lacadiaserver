@@ -259,7 +259,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		},
 	},
 	schrodinger: {
-		name: "Schrödinger",
+		name: "Schrodinger",
 		shortDesc: "This Pokemon's Normal-type moves become Ghost type, and this Pokemon's Ghost-type moves become Normal type",
 		num: 2013,
 		onModifyTypePriority: -1,
