@@ -349,4 +349,26 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Ice",
 		contestType: "Cool",
 	},
+	powerscale: {
+		num: 2011,
+		accuracy: 90,
+		basePower: 140,
+		category: "Physical",
+		name: "Power Scale",
+		pp: 5,
+		priority: 0,
+		flags: {contact: 1, protect: 1, mirror: 1, metronome: 1},
+		onModifyType(move, pokemon) {
+			const types = pokemon.getTypes();
+			let type = types[1];
+			if (type === 'Bird') type = '???';
+			if (type === '???' && types[0]) type = types[1];
+			move.type = type;
+		},
+		recoil: [1, 2],
+		secondary: null,
+		target: "normal",
+		type: "Water",
+		contestType: "Beautiful",
+	},
 };

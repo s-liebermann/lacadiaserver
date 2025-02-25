@@ -2264,4 +2264,11 @@ export const AbilitiesText: {[id: IDEntry]: AbilityText} = {
 
 		activate: "  [POKEMON] extends [MOVE] by 2 turns!",
 	},
+
+	surveil: {
+		name: "Surveil",
+		desc: "When the user switches in, or a new pokemon enters the field, reveals the Speed stat of the opposing Pokemon",
+		shortDesc: "On switch-in or on enemy switch, reveals the opposing Pokemon's Speed stat",
+		activate: " [POKEMON] has a Speed stat of [SPEED]!",
+	}
 };

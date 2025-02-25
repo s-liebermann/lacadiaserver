@@ -223,8 +223,8 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	// 		},
 	// 	},
 	// },
-	balancesurge: {
-		name: "Balance Surge",
+	polarity: {
+		name: "Polarity",
 		shortDesc: "Fire moves are boosted by 20% in Snow, Ice moves are boosted by 20% in Sun.",
 		num: 2011,
 		onBasePowerPriority: 21,
@@ -243,7 +243,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	caffeinerush: {
 		name: "Caffeine Rush",
-		shortDesc: "The Pokemon's Speed is raised by 6 stages and restores 25% of its HP when it reaches 1/2 or less of its max HP. Once per battle.",
+		shortDesc: "+6 Speed and restores 25% of HP when reaching 1/2 or less of max HP. Once per battle.",
 		num: 2012,
 		onAfterMoveSecondary(target, source, move) {
 			if (target.caffeinated) return;
@@ -257,6 +257,37 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				this.heal(target.baseMaxhp / 4);
 			}
 		},
+	},
+	schrodinger: {
+		name: "Schrödinger",
+		shortDesc: "This Pokemon's Normal-type moves become Ghost type, and this Pokemon's Ghost-type moves become Normal type",
+		num: 2013,
+		onModifyTypePriority: -1,
+		onModifyType(move, pokemon) {
+			const noModifyType = [
+				'judgment', 'multiattack', 'naturalgift', 'revelationdance', 'technoblast', 'terrainpulse', 'weatherball',
+			];
+			if (move.type === 'Normal' && !noModifyType.includes(move.id) &&
+				!(move.isZ && move.category !== 'Status') && !(move.name === 'Tera Blast' && pokemon.terastallized)) {
+				move.type = 'Ghost';
+				move.typeChangerBoosted = this.effect;
+			}
+			else {
+				if (move.type === 'Ghost' && !noModifyType.includes(move.id) &&
+				!(move.isZ && move.category !== 'Status') && !(move.name === 'Tera Blast' && pokemon.terastallized)) {
+					move.type = 'Normal';
+				}
+			}
+		},
+	},
+	surveil: {
+		name: "Surveil",
+		shortDesc: "On switch-in or on enemy switch, reveals the opposing Pokemon's Speed stat",
+		num: 2014,
+		onStart(pokemon) {
+			this.add('-activate', pokemon, 'ability: Surveil', pokemon.name, '[of] ' + pokemon.spe);
+		},
+
 	}
 	
 
