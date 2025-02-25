@@ -68,4 +68,36 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "OU",
 		isModded: true
 	},	
+	oposse: {
+		tier: "OU",
+		isModded: true
+	},
+	pyrant: {
+		tier: "OU",
+		isModded: true
+	},
+	smeltmor: {
+		tier: "OU",
+		isModded: true
+	},
+	gunraptor: {
+		tier: "OU",
+		isModded: true
+	},
+	yakoyzaink: {
+		tier: "OU",
+		isModded: true
+	},
+	yakoyzaoni: {
+		tier: "OU",
+		isModded: true
+	},
+	yakoyzaryujin: {
+		tier: "OU",
+		isModded: true
+	},
+	yakoyzatiger: {
+		tier: "OU",
+		isModded: true
+	}
 };
