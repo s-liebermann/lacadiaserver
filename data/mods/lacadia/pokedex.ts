@@ -509,7 +509,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Monster"],
 	},
 	larvos: {
-		num: 2047,
+		num: 2049,
 		name: "Larvos",
 		types: ["Bug"],
 		genderRatio: {M: 0.5, F: 0.50},
@@ -522,7 +522,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Bug"],
 	},
 	syrinsect: {
-		num: 2049,
+		num: 2050,
 		name: "Syrinsect",
 		types: ["Bug"],
 		genderRatio: {M: 0.5, F: 0.50},
@@ -535,7 +535,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Bug"],
 	},
 	stratoclysm: {
-		num: 2050,
+		num: 2051,
 		name: "Stratoclysm",
 		types: ["Bug", "Dragon"],
 		genderRatio: {M: 0.5, F: 0.50},
@@ -547,7 +547,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Bug"],
 	},
 	possolo: {
-		num: 2050,
+		num: 2052,
 		name: "Possolo",
 		types: ["Normal"],
 		genderRatio: {M: 0.5, F: 0.50},
@@ -560,7 +560,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Bug"],
 	},
 	oposse: {
-		num: 2051,
+		num: 2053,
 		name: "Oposse",
 		types: ["Normal", "Ghost"],
 		genderRatio: {M: 0.5, F: 0.50},
@@ -572,7 +572,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Bug"],
 	},
 	nokoi: {
-		num: 2052,
+		num: 2054,
 		name: "Nokoi",
 		types: ["Water"],
 		genderRatio: {M: 0.5, F: 0.50},
@@ -585,7 +585,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Water"],
 	},
 	yakoyzaink: {
-		num: 2053,
+		num: 2055,
 		name: "Yakoyza-Ink",
 		baseForme: "Ink",
 		types: ["Water", "Dark"],
@@ -600,7 +600,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		formeOrder: ["Yakoyza-Ink", "Yakoyza-Oni", "Yakoyza-Ryujin", "Yakoyza-Tiger"],
 	},
 	yakoyzaoni: {
-		num: 2053,
+		num: 2055,
 		name: "Yakoyza-Oni",
 		baseForme: "Ink",
 		types: ["Water", "Fire"],
@@ -616,7 +616,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		formeOrder: ["Yakoyza-Ink", "Yakoyza-Oni", "Yakoyza-Ryujin", "Yakoyza-Tiger"],
 	},
 	yakoyzaryujin: {
-		num: 2053,
+		num: 2055,
 		name: "Yakoyza-Ryujin",
 		baseForme: "Ink",
 		types: ["Water", "Dragon"],
@@ -632,7 +632,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		formeOrder: ["Yakoyza-Ink", "Yakoyza-Oni", "Yakoyza-Ryujin", "Yakoyza-Tiger"],
 	},
 	yakoyzatiger: {
-		num: 2053,
+		num: 2055,
 		name: "Yakoyza-Tiger",
 		baseForme: "Ink",
 		types: ["Water", "Fighting"],
@@ -648,7 +648,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		formeOrder: ["Yakoyza-Ink", "Yakoyza-Oni", "Yakoyza-Ryujin", "Yakoyza-Tiger"],
 	},
 	ornidrone: {
-		num: 2054,
+		num: 2056,
 		name: "Nokoi",
 		types: ["Steel", "Flying"],
 		genderRatio: {M: 0.5, F: 0.50},
@@ -661,7 +661,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Water"],
 	},
 	velostrike: {
-		num: 2055,
+		num: 2057,
 		name: "Velostrike",
 		types: ["Steel", "Flying"],
 		genderRatio: {M: 0.5, F: 0.50},
@@ -674,7 +674,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		eggGroups: ["Water"],
 	},
 	gunraptor: {
-		num: 2056,
+		num: 2058,
 		name: "Gunraptor",
 		types: ["Steel", "Flying"],
 		genderRatio: {M: 0.5, F: 0.50},
