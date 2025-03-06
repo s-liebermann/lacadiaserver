@@ -366,6 +366,10 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 			if (type === '???' && types[0]) type = types[1];
 			move.type = type;
 		},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Head Smash", target);
+		},
 		recoil: [1, 2],
 		secondary: null,
 		target: "normal",

@@ -8,6 +8,7 @@ export interface PokemonSet<T = string> {
 	moves: T[];
 	nature: T;
 	teraType: string;
+	hyperType: string;
 	gender: string;
 	evs: StatsTable;
 	ivs: StatsTable;

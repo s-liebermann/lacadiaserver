@@ -194,12 +194,14 @@ export const Teams = new class Teams {
 			}
 
 			if (set.pokeball || set.hpType || set.gigantamax ||
-				(set.dynamaxLevel !== undefined && set.dynamaxLevel !== 10) || set.teraType) {
+				(set.dynamaxLevel !== undefined && set.dynamaxLevel !== 10) || set.teraType || set.hyperType) {
 				buf += ',' + (set.hpType || '');
 				buf += ',' + this.packName(set.pokeball || '');
 				buf += ',' + (set.gigantamax ? 'G' : '');
 				buf += ',' + (set.dynamaxLevel !== undefined && set.dynamaxLevel !== 10 ? set.dynamaxLevel : '');
 				buf += ',' + (set.teraType || '');
+				buf += ',' + (set.hyperType || '');
+
 			}
 		}
 
@@ -331,6 +333,7 @@ export const Teams = new class Teams {
 				set.gigantamax = !!misc[3];
 				set.dynamaxLevel = (misc[4] ? Number(misc[4]) : 10);
 				set.teraType = misc[5];
+				set.hyperType = misc[6];
 			}
 			if (j < 0) break;
 			i = j + 1;
@@ -408,6 +411,9 @@ export const Teams = new class Teams {
 		}
 		if (set.teraType) {
 			out += `Tera Type: ${set.teraType}  \n`;
+		}
+		if (set.hyperType) {
+			out += `Hyper Type: ${set.hyperType} \n`
 		}
 
 		// stats
@@ -495,7 +501,10 @@ export const Teams = new class Teams {
 			set.teraType = aggressive ? line.replace(/[^a-zA-Z0-9]/g, '') : line;
 		} else if (line === 'Gigantamax: Yes') {
 			set.gigantamax = true;
-		} else if (line.startsWith('EVs: ')) {
+		} else if (line.startsWith('Hyper Type: ')) {
+			line = line.slice(15);
+			set.hpType = aggressive ? toID(line) : line;
+		}else if (line.startsWith('EVs: ')) {
 			line = line.slice(5);
 			const evLines = line.split('/');
 			set.evs = {hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0};
