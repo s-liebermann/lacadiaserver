@@ -43,6 +43,37 @@ export const Formats: FormatList = [
 				}
 			}
 		},
+		getHyper(pokemon) {
+			const hyper = /* @__PURE__ */ new Set();
+			hyper.add(pokemon.hyperType);
+			return hyper;
+		  },
+		  onBeforeSwitchIn(pokemon) {
+			let format = this.format;
+			if(pokemon.hypered)
+			{
+				for (const ability of format.getHyper(pokemon)) {
+				const effect = "ability:" + ability;
+				pokemon.volatiles[effect] = { id: this.toID(effect), target: pokemon };
+				if (!pokemon.m.abils)
+					pokemon.m.abils = [];
+				if (!pokemon.m.abils.includes(effect))
+					pokemon.m.abils.push(effect);
+				}
+			}
+		  },
+		  onSwitchInPriority: 2,
+		  onSwitchIn(pokemon) {
+			let format = this.format;
+			if(pokemon.hypered)
+			{
+			for (const ability of format.getHyper(pokemon)) {
+			  const effect = "ability:" + ability;
+			  delete pokemon.volatiles[effect];
+			  pokemon.addVolatile(effect);
+			}
+		}
+	 }
 	},
 	{
 		name: "[Gen 9] Alternatium EX",

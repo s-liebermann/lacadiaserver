@@ -1958,13 +1958,11 @@ export class BattleActions {
 		for (const ally of pokemon.side.pokemon) {
 			ally.canHyper = null;
 		}
-		// if (pokemon.species.baseSpecies === 'Ogerpon') {
-		// 	const tera = pokemon.species.id === 'ogerpon' ? 'tealtera' : 'tera';
-		// 	pokemon.formeChange(pokemon.species.id + tera, null, true);
-		// }
-		// if (pokemon.species.name === 'Terapagos-Terastal' && type === 'Stellar') {
-		// 	pokemon.formeChange('Terapagos-Stellar', null, true);
-		// }
+
+		const effect = "ability:" + hyper;
+		delete pokemon.volatiles[effect];
+		pokemon.addVolatile(effect);
+		
 		this.battle.runEvent('AfterHyper', pokemon);
 	  }
 
