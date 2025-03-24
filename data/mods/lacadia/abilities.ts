@@ -358,7 +358,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	abrasive: {
 		name: "Abrasive",
-		shortDesc: "On switch-in, deal damage equal to 12.5% of the enemy's max HP",
+		shortDesc: "(Hyper) On switch-in, deal damage equal to 12.5% of the enemy's max HP",
 		num: 2019,
 		onSwitchIn(pokemon) {
 			this.effectState.switchingIn = true;
@@ -378,7 +378,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	luckystar: {
 		name: "Lucky Star",
-		shortDesc: "Doubles chance of secondary effects on target, halves chance on user",
+		shortDesc: "(Hyper) Doubles chance of secondary effects on target, halves chance on user",
 		num: 2020,
 		onModifyMovePriority: -2,
 		onModifyMove(move) {
@@ -402,7 +402,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	aspecttwist: {
 		name: "Aspect Twist",
-		shortDesc: "Physical moves use Sp. Atk, Special moves use Atk.",
+		shortDesc: "(Hyper) Physical moves use Sp. Atk, Special moves use Atk.",
 		num: 2020,
 		onModifyMovePriority: -2,
 		onModifyMove(move) {
