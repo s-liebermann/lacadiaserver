@@ -99,5 +99,17 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	yakoyzatiger: {
 		tier: "OU",
 		isModded: true
-	}
+	},
+	velyger: {
+		tier: "OU",
+		isModded: true
+	},
+	asterbat: {
+		tier: "OU",
+		isModded: true
+	},
+	furnawurm: {
+		tier: "OU",
+		isModded: true
+	},
 };

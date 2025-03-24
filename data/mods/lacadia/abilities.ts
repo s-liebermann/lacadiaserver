@@ -181,48 +181,48 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 			}
 		},
 	},
-	// backstabber: {
-	// 	name: 'Backstabber',
-	// 	shortDesc: 'If target switches out, hits them with readied attack before switch occurs',
-	// 	num: 2010,
-	// 	onTryHit(target, pokemon) {
-	// 		target.side.removeSideCondition('pursuit');
-	// 	},
-	// 	condition: {
-	// 		duration: 1,
-	// 		onBeforeSwitchOut(pokemon) {
-	// 			this.debug('Pursuit start');
-	// 			let alreadyAdded = false;
-	// 			pokemon.removeVolatile('destinybond');
-	// 			for (const source of this.effectState.sources) {
-	// 				if (!source.isAdjacent(pokemon) || !this.queue.cancelMove(source) || !source.hp) continue;
-	// 				if (!alreadyAdded) {
-	// 					this.add('-activate', pokemon, 'move: Pursuit');
-	// 					alreadyAdded = true;
-	// 				}
-	// 				// Run through each action in queue to check if the Pursuit user is supposed to Mega Evolve this turn.
-	// 				// If it is, then Mega Evolve before moving.
-	// 				if (source.canMegaEvo || source.canUltraBurst || source.canTerastallize || source.canHyper) {
-	// 					for (const [actionIndex, action] of this.queue.entries()) {
-	// 						if (action.pokemon === source) {
-	// 							if (action.choice === 'megaEvo') {
-	// 								this.actions.runMegaEvo(source);
-	// 							} else if (action.choice === 'terastallize') {
-	// 								// Also a "forme" change that happens before moves, though only possible in NatDex
-	// 								this.actions.terastallize(source);
-	// 							} else {
-	// 								continue;
-	// 							}
-	// 							this.queue.list.splice(actionIndex, 1);
-	// 							break;
-	// 						}
-	// 					}
-	// 				}
-	// 				this.actions.runMove('pursuit', source, source.getLocOf(pokemon));
-	// 			}
-	// 		},
-	// 	},
-	// },
+	backstabber: {
+		name: 'Backstabber',
+		shortDesc: 'If target switches out, hits them with readied attack before switch occurs',
+		num: 2010,
+		onTryHit(target, pokemon) {
+			target.side.removeSideCondition('pursuit');
+		},
+		condition: {
+			duration: 1,
+			onBeforeSwitchOut(pokemon) {
+				this.debug('Pursuit start');
+				let alreadyAdded = false;
+				pokemon.removeVolatile('destinybond');
+				for (const source of this.effectState.sources) {
+					if (!source.isAdjacent(pokemon) || !this.queue.cancelMove(source) || !source.hp) continue;
+					if (!alreadyAdded) {
+						this.add('-activate', pokemon, 'move: Pursuit');
+						alreadyAdded = true;
+					}
+					// Run through each action in queue to check if the Pursuit user is supposed to Mega Evolve this turn.
+					// If it is, then Mega Evolve before moving.
+					if (source.canMegaEvo || source.canUltraBurst || source.canTerastallize || source.canHyper) {
+						for (const [actionIndex, action] of this.queue.entries()) {
+							if (action.pokemon === source) {
+								if (action.choice === 'megaEvo') {
+									this.actions.runMegaEvo(source);
+								} else if (action.choice === 'terastallize') {
+									// Also a "forme" change that happens before moves, though only possible in NatDex
+									this.actions.terastallize(source);
+								} else {
+									continue;
+								}
+								this.queue.list.splice(actionIndex, 1);
+								break;
+							}
+						}
+					}
+					this.actions.runMove('pursuit', source, source.getLocOf(pokemon));
+				}
+			},
+		},
+	},
 	polarity: {
 		name: "Polarity",
 		shortDesc: "Fire moves are boosted by 20% in Snow, Ice moves are boosted by 20% in Sun.",
@@ -280,14 +280,41 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 			}
 		},
 	},
-	surveil: {
-		name: "Surveil",
+	surveillance: {
+		name: "Surveillance",
 		shortDesc: "On switch-in or on enemy switch, reveals the opposing Pokemon's Speed stat",
 		num: 2014,
 		onStart(pokemon) {
-			this.add('-activate', pokemon, 'ability: Surveil', pokemon.name, '[of] ' + pokemon.spe);
+			this.add('-activate', pokemon, 'ability: Surveillance', pokemon.name, '[of] ' + pokemon.spe);
 		},
-
+	},
+	meltdown: {
+		name: "Meltdown",
+		shortDesc: "Getting hit by a Fire-type move allows the user to use Eruption immediately after",
+		num: 2015,
+		onDamagingHit(damage, target, source, move) {
+			if (move.type === 'Fire') {
+				const newMove = this.dex.getActiveMove('eruption');
+				this.actions.useMove(newMove, target, source);
+			}
+		},
+	},
+	metallicappetite: {
+		name: "Metallic Appetite",
+		shortDesc: "Boosts damage of moves by 30% when a Steel-type Pokemon is on the field",
+		num: 2016,
+		onBasePower(basePower, attacker, defender, move) {
+			for (const allyActive of attacker.allies()) {
+				if (allyActive.type === 'Steel') {
+					return this.chainModify(1.3);
+				}
+			}
+			for (const target of attacker.adjacentFoes()) {
+				if (target.type === 'Steel') {
+					return this.chainModify(1.3);
+				}
+			}
+		},
 	}
 	
 

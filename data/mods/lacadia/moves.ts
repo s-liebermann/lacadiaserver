@@ -376,4 +376,27 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Water",
 		contestType: "Beautiful",
 	},
+	snackbreak: {
+		num: 575,
+		accuracy: 100,
+		basePower: 0,
+		category: "Status",
+		name: "Snack Break",
+		pp: 20,
+		priority: 0,
+		flags: {protect: 1, metronome: 1, healreplacementhalf: 1},
+		onHit(target, source, move) {
+				move.flags.push({
+					chance: 100,
+					boosts: {
+						def: -1,
+					}
+				})
+		},
+		selfSwitch: true,
+		secondary: null,
+		target: "normal",
+		type: "Fairy",
+		contestType: "Cool",
+	},
 };
