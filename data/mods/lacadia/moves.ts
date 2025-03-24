@@ -382,6 +382,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		basePower: 0,
 		category: "Status",
 		name: "Snack Break",
+		shortDesc: "User switches out, replacement gets healed for 1/4 of their maximum HP",
 		pp: 20,
 		priority: 0,
 		flags: {protect: 1, metronome: 1, healreplacementhalf: 1},

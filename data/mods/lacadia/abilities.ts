@@ -315,7 +315,115 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				}
 			}
 		},
-	}
+	},
+	momentum: {
+		name: "Momentum",
+		shortDesc: "Move power is boosted 20% for each time it is used consecutively",
+		num: 2017,
+		onStart(pokemon) {
+			pokemon.addVolatile('metronome');
+			this.effectState.lastMove = '';
+			this.effectState.numConsecutive = 0;
+		},
+		onTryMovePriority: -2,
+			onTryMove(pokemon, target, move) {
+				if (move.callsMove) return;
+				if (this.effectState.lastMove === move.id && pokemon.moveLastTurnResult) {
+					this.effectState.numConsecutive++;
+				} else if (pokemon.volatiles['twoturnmove']) {
+					if (this.effectState.lastMove !== move.id) {
+						this.effectState.numConsecutive = 1;
+					} else {
+						this.effectState.numConsecutive++;
+					}
+				} else {
+					this.effectState.numConsecutive = 0;
+				}
+				this.effectState.lastMove = move.id;
+			},
+			onModifyDamage(damage, source, target, move) {
+				const dmgMod = [4096, 4915, 5734, 6553, 7372, 8192];
+				const numConsecutive = this.effectState.numConsecutive > 5 ? 5 : this.effectState.numConsecutive;
+				this.debug(`Current Metronome boost: ${dmgMod[numConsecutive]}/4096`);
+				return this.chainModify([dmgMod[numConsecutive], 4096]);
+			},
+	},
+	huntersinstincts: {
+		name: "Hunter's Insticts",
+		shortDesc: "On switch-in or on enemy switch, reveals whether the opponent can be knocked out in one hit",
+		num: 2018,
+		onStart(pokemon) {
+			this.add('-activate', pokemon, 'ability: Hunters Insticts', pokemon.name, '[of] ' + pokemon.spe);
+		},
+	},
+	abrasive: {
+		name: "Abrasive",
+		shortDesc: "On switch-in, deal damage equal to 12.5% of the enemy's max HP",
+		num: 2019,
+		onSwitchIn(pokemon) {
+			this.effectState.switchingIn = true;
+		},
+		onStart(pokemon) {
+			if (!this.effectState.switchingIn) return;
+			// copies across in doubles/triples
+			// (also copies across in multibattle and diagonally in free-for-all,
+			// but side.foe already takes care of those)
+			const target = pokemon.side.foe.active[pokemon.side.foe.active.length - 1 - pokemon.position];
+			if (target) {
+				this.damage(target.baseMaxhp / 8, target, pokemon);
+			}
+			this.effectState.switchingIn = false;
+		},
+		flags: {isHyper: 1},
+	},
+	luckystar: {
+		name: "Lucky Star",
+		shortDesc: "Doubles chance of secondary effects on target, halves chance on user",
+		num: 2020,
+		onModifyMovePriority: -2,
+		onModifyMove(move) {
+			if (move.secondaries) {
+				this.debug('doubling secondary chance');
+				for (const secondary of move.secondaries) {
+					if (secondary.chance) secondary.chance *= 2;
+				}
+			}
+			if (move.self?.chance) move.self.chance *= 2;
+		},
+		onDamagingHit(damage, target, source, move) {
+			if (move.secondaries) {
+				this.debug('halving secondary chances');
+				for (const secondary of move.secondaries) {
+					if (secondary.chance) secondary.chance *= 0.5;
+				}
+			}
+		},
+		flags: {isHyper: 1},
+	},
+	aspecttwist: {
+		name: "Aspect Twist",
+		shortDesc: "Physical moves use Sp. Atk, Special moves use Atk.",
+		num: 2020,
+		onModifyMovePriority: -2,
+		onModifyMove(move) {
+			if (move.category === 'Special') {
+				move.category = 'Physical'
+			}
+			else if (move.category === 'Physical') {
+				move.category = 'Special'
+			}
+			
+		},
+		onDamagingHit(damage, target, source, move) {
+			if (move.category === 'Special') {
+				move.category = 'Physical'
+			}
+			else if (move.category === 'Physical') {
+				move.category = 'Special'
+			}
+		},
+		flags: {isHyper: 1},
+	},
 	
 
 

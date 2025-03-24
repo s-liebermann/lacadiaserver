@@ -2468,6 +2468,7 @@ export const Learnsets: {[speciesid: string]: ModdedLearnsetData} = {
 			mudslap: ["9M", "9L12", "8L12", "7L10", "7V", "6L12", "5L12", "4T", "4L15", "3T", "3L25"],
 			outrage: ["9M"],
 			protect: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "3M"],
+			rapidspin: ["9M"],
 			rage: ["7V"],
 			rest: ["9M", "8M", "8V", "7M", "7V", "6M", "5M", "4M", "3M"],
 			return: ["7M", "7V", "6M", "5M", "4M", "3M"],
