@@ -424,7 +424,52 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		},
 		flags: {isHyper: 1},
 	},
-	
+	flightless: {
+		name: "Flightless",
+		shortDesc: "Boosts damage of Flying-type moves by 50%",
+		num: 2021,
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Flying') {
+				this.debug('Flightless boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Flying') {
+				this.debug('Flightless boost');
+				return this.chainModify(1.5);
+			}
+		},
+		flags: {},
+	},
+	brainjack: {
+		name: "Brain Jack",
+		shortDesc: "Boosts damage of Flying-type moves by 50%",
+		num: 2022,
+		onSourceDamagingHit(damage, target, source, move) {
+			if (target.hasAbility('shielddust') || target.hasItem('covertcloak')) return;
+			if (move.type === 'Psychic') 
+			{
+				if (this.randomChance(1, 2)) {
+				const result = this.random(5);
+				if (result === 0) {
+					source.addVolatile('attract', this.effectState.target);
+				} else if (result === 1) {
+					source.addVolatile('confusion', this.effectState.target);
+				} else if (result === 2) {
+					source.addVolatile('torment', this.effectState.target);
+				} else if (result === 3) {
+					source.addVolatile('disable', this.effectState.target);
+				} else {
+					source.addVolatile('encore', this.effectState.target);
+				}
+			}
+		}
+		},
+		flags: {},
+	}
 
 
 }

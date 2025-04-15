@@ -112,4 +112,12 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 		tier: "OU",
 		isModded: true
 	},
+	dodonodon: {
+		tier: "OU",
+		isModded: true
+	},
+	tuatargon: {
+		tier: "OU",
+		isModded: true
+	}
 };
