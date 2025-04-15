@@ -446,7 +446,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	},
 	brainjack: {
 		name: "Brain Jack",
-		shortDesc: "Boosts damage of Flying-type moves by 50%",
+		shortDesc: "Damaging Psychic Moves have a 50% chance to inflict infatuation, confusion, torment, disable, or encore",
 		num: 2022,
 		onSourceDamagingHit(damage, target, source, move) {
 			if (target.hasAbility('shielddust') || target.hasItem('covertcloak')) return;
@@ -455,15 +455,15 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				if (this.randomChance(1, 2)) {
 				const result = this.random(5);
 				if (result === 0) {
-					source.addVolatile('attract', this.effectState.target);
+					target.addVolatile('attract', this.effectState.target);
 				} else if (result === 1) {
-					source.addVolatile('confusion', this.effectState.target);
+					target.addVolatile('confusion', this.effectState.target);
 				} else if (result === 2) {
-					source.addVolatile('torment', this.effectState.target);
+					target.addVolatile('torment', this.effectState.target);
 				} else if (result === 3) {
-					source.addVolatile('disable', this.effectState.target);
+					target.addVolatile('disable', this.effectState.target);
 				} else {
-					source.addVolatile('encore', this.effectState.target);
+					target.addVolatile('encore', this.effectState.target);
 				}
 			}
 		}

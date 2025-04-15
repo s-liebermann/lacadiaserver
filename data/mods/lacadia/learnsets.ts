@@ -2681,6 +2681,7 @@ export const Learnsets: {[speciesid: string]: ModdedLearnsetData} = {
 			snore: ["7T", "7V", "6T", "5T", "4T", "3T"],
 			steelwing: ["9M", "7V", "6M", "4M", "3M"],
 			stompingtantrum: ["9M", "7T"],
+			stoneedge: ["9M"],
 			substitute: ["9M", "8V", "7M", "7V", "6M", "5M", "4M", "3T"],
 			sunnyday: ["9M", "7M", "7V", "6M", "5M", "4M", "3M"],
 			supercellslam: ["9M"],
