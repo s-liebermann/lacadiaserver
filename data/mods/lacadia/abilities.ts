@@ -469,6 +469,41 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		}
 		},
 		flags: {},
+	},
+	malodorous:
+	{
+		name: "Malodorous",
+		shortDesc: "Lowers all stats of opponent by 1 if the user is knocked out",
+		num: 2023,
+		onDamagingHit(damage, target, source, move) {
+			if (!target.hp) {
+				this.damage(source.baseMaxhp / 4, source, target);
+				this.boost({atk: -1,def: -1,spa: -1,spd: -1,spe: -1}, source, target, null, true);
+			}
+		}
+	},
+	lifeaurora:
+	{
+		name: "Life Aurora",
+		shortDesc: "Heals the user for the same amount of HP that the opponent heals for",
+		num: 2024,
+		onSourceHeal(damage, target, source, effect) {
+				target.heal(damage);
+				return 0;
+		}
+	},
+	inrushcurrent: 
+	{
+		name: "Inrush Current",
+		shortDesc: "Doubles power of next move if current move fails",
+		num: 2025,
+		onBasePowerPriority: 21,
+		onBasePower(basePower, attacker, defender, move) {
+			if (attacker.moveLastTurnResult === false) {
+				return move.basePower * 2;
+			}
+			return move.basePower;
+		},
 	}
 
 

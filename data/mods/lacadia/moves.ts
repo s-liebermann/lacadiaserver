@@ -377,7 +377,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		contestType: "Beautiful",
 	},
 	snackbreak: {
-		num: 575,
+		num: 2012,
 		accuracy: 100,
 		basePower: 0,
 		category: "Status",
@@ -399,5 +399,71 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		target: "normal",
 		type: "Fairy",
 		contestType: "Cool",
+	},
+	psychofluiddistortion: {
+		num: 2013,
+		accuracy: true,
+		basePower: 0,
+		category: "Status",
+		name: "Psycho-Fluid Distortion",
+		shortDesc: "Sets up Trick Room + Rain",
+		pp: 5,
+		priority: -7,
+		flags: {mirror: 1, metronome: 1},
+		weather: 'RainDance',
+		pseudoWeather: 'trickroom',
+		condition: {
+			duration: 5,
+			durationCallback(source, effect) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-activate', source, 'ability: Persistent', '[move] Trick Room');
+					return 7;
+				}
+				return 5;
+			},
+			onFieldStart(target, source) {
+				if (source?.hasAbility('persistent')) {
+					this.add('-fieldstart', 'move: Trick Room', '[of] ' + source, '[persistent]');
+				} else {
+					this.add('-fieldstart', 'move: Trick Room', '[of] ' + source);
+				}
+			},
+			onFieldRestart(target, source) {
+				this.field.removePseudoWeather('trickroom');
+			},
+			// Speed modification is changed in Pokemon.getActionSpeed() in sim/pokemon.js
+			onFieldResidualOrder: 27,
+			onFieldResidualSubOrder: 1,
+			onFieldEnd() {
+				this.add('-fieldend', 'move: Trick Room');
+			},
+		},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Trick Room", target);
+		},
+		secondary: null,
+		target: "all",
+		type: "Psychic",
+		contestType: "Cool",
+	},
+	ionstorm: {
+		num: 2014,
+		accuracy: 100,
+		basePower: 50,
+		category: "Special",
+		name: "Ion Storm",
+		shortDesc: "+1 Priority, changes normal-type moves to electric-type for the rest of the turn",
+		pp: 10,
+		priority: 1,
+		pseudoWeather: 'iondeluge',
+		flags: {protect: 1, reflectable: 1, mirror: 1},
+		onPrepareHit(target, source, move) {
+			this.attrLastMove('[still]');
+			this.add('-anim', source, "Ion Deluge", target);
+		},
+		target: "normal",
+		type: "Electric",
+		contestType: "Clever",
 	},
 };

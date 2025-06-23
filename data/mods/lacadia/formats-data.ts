@@ -119,5 +119,37 @@ export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	tuatargon: {
 		tier: "OU",
 		isModded: true
-	}
+	},
+	ragnarock: {
+		tier: "OU",
+		isModded: true
+	},
+	vladibolt: {
+		tier: "OU",
+		isModded: true
+	},
+	crucigem: {
+		tier: "OU",
+		isModded: true
+	},
+	censerpent: {
+		tier: "OU",
+		isModded: true
+	},
+	monolithid: {
+		tier: "OU",
+		isModded: true
+	},
+	ramnant: {
+		tier: "OU",
+		isModded: true
+	},
+	selky: {
+		tier: "OU",
+		isModded: true
+	},
+	lanturnal: {
+		tier: "OU",
+		isModded: true
+	},
 };
