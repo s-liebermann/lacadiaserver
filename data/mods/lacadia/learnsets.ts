@@ -3192,6 +3192,7 @@ export const Learnsets: {[speciesid: string]: ModdedLearnsetData} = {
 			icebeam: ["9M", "8M", "7M", "6M", "5M", "4M", "3M"],
 			icywind: ["9M", "8M", "7T", "6T", "5T", "4T"],
 			iondeluge: ["7L54", "6L54"],
+			ionstorm: ["9M"],
 			liquidation: ["9M"],
 			mimic: ["3T"],
 			muddywater: ["9M"],
