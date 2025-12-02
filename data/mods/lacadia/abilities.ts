@@ -181,48 +181,6 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 			}
 		},
 	},
-	backstabber: {
-		name: 'Backstabber',
-		shortDesc: 'If target switches out, hits them with readied attack before switch occurs',
-		num: 2010,
-		onTryHit(target, pokemon) {
-			target.side.removeSideCondition('pursuit');
-		},
-		condition: {
-			duration: 1,
-			onBeforeSwitchOut(pokemon) {
-				this.debug('Pursuit start');
-				let alreadyAdded = false;
-				pokemon.removeVolatile('destinybond');
-				for (const source of this.effectState.sources) {
-					if (!source.isAdjacent(pokemon) || !this.queue.cancelMove(source) || !source.hp) continue;
-					if (!alreadyAdded) {
-						this.add('-activate', pokemon, 'move: Pursuit');
-						alreadyAdded = true;
-					}
-					// Run through each action in queue to check if the Pursuit user is supposed to Mega Evolve this turn.
-					// If it is, then Mega Evolve before moving.
-					if (source.canMegaEvo || source.canUltraBurst || source.canTerastallize || source.canHyper) {
-						for (const [actionIndex, action] of this.queue.entries()) {
-							if (action.pokemon === source) {
-								if (action.choice === 'megaEvo') {
-									this.actions.runMegaEvo(source);
-								} else if (action.choice === 'terastallize') {
-									// Also a "forme" change that happens before moves, though only possible in NatDex
-									this.actions.terastallize(source);
-								} else {
-									continue;
-								}
-								this.queue.list.splice(actionIndex, 1);
-								break;
-							}
-						}
-					}
-					this.actions.runMove('pursuit', source, source.getLocOf(pokemon));
-				}
-			},
-		},
-	},
 	polarity: {
 		name: "Polarity",
 		shortDesc: "Fire moves are boosted by 20% in Snow, Ice moves are boosted by 20% in Sun.",
@@ -477,7 +435,6 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		num: 2023,
 		onDamagingHit(damage, target, source, move) {
 			if (!target.hp) {
-				this.damage(source.baseMaxhp / 4, source, target);
 				this.boost({atk: -1,def: -1,spa: -1,spd: -1,spe: -1}, source, target, null, true);
 			}
 		}
@@ -488,7 +445,7 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 		shortDesc: "Heals the user for the same amount of HP that the opponent heals for",
 		num: 2024,
 		onSourceHeal(damage, target, source, effect) {
-				target.heal(damage);
+				target.heal(damage); //TODO fix
 				return 0;
 		}
 	},
@@ -503,6 +460,68 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				return move.basePower * 2;
 			}
 			return move.basePower;
+		},
+	},
+	hoarder:
+	{
+		name: "Hoarder",
+		shortDesc: "Gives a copy of the user's current item to allies and itself",
+		num: 2026,
+	},
+	stealthstrike:
+	{
+		name: "Stealth Strike",
+		shortDesc: "Semi-invulnerable moves x1.5 damage, x2 if the opponent switches",
+		num: 2027,
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender) {
+			if (attacker.isSemiInvulnerable())
+			{
+				if (!defender.activeTurns) {
+					return this.chainModify(2);
+				}
+				else
+				{
+					return this.chainModify(1.5)
+				}
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender) {
+			if (attacker.isSemiInvulnerable())
+			{
+				if (!defender.activeTurns) {
+					return this.chainModify(2);
+				}
+				else
+				{
+					return this.chainModify(1.5)
+				}
+			}
+		},
+	},
+	vitrified:
+	{
+		name: "Vitrified",
+		shortDesc: "+1 Sp. Def upon entry, one time only",
+		num: 2026,
+		onStart(pokemon) {
+			for (const allyActive of pokemon.allies()) {
+				if (allyActive.shieldBoost) return;
+					pokemon.shieldBoost = true;
+					this.boost({spd: 1}, pokemon);
+			}
+		},
+	},
+	circleofprotection:
+	{
+		name: "Circle of Protection",
+		shortDesc: "Halves base power of moves used against user if base power is 100 or greater",
+		num: 2027,
+		onSourceModifyDamage(damage, source, target, move) {
+			if (move.basePower >= 100) {
+				return this.chainModify(0.5);
+			}
 		},
 	}
 

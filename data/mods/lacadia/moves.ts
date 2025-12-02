@@ -460,7 +460,7 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		flags: {protect: 1, reflectable: 1, mirror: 1},
 		onPrepareHit(target, source, move) {
 			this.attrLastMove('[still]');
-			this.add('-anim', source, "Ion Deluge", target);
+			this.add('-anim', source, "Electro Ball", target);
 		},
 		target: "normal",
 		type: "Electric",
