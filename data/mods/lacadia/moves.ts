@@ -119,12 +119,12 @@ export const Moves: {[k: string]: ModdedMoveData} = {
 		type: "Psychic",
 		contestType: "Beautiful",
 	},
-	freezingtempo: {
+	tundratango: {
 		num: 2004,
 		accuracy: true,
 		basePower: 0,
 		category: "Status",
-		name: "Freezing Tempo",
+		name: "Tundra Tango",
 		shortDesc: "Increases Sp. Atk and Speed by 1 stage. Next move is guaranteed to hit.",
 		pp: 10,
 		priority: 0,

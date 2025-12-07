@@ -523,6 +523,58 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 				return this.chainModify(0.5);
 			}
 		},
+	},
+	bellofruin: {
+		onResidualOrder: 29,
+		onResidual(pokemon) {
+			if (pokemon.baseSpecies.baseSpecies !== 'Sacrabell-Hymn' || pokemon.transformed) {
+				return;
+			}
+			if (pokemon.hp <= pokemon.maxhp / 2 && !['Dirge'].includes(pokemon.species.forme)) {
+				pokemon.addVolatile('dirge');
+			} else if (pokemon.hp > pokemon.maxhp / 2 && ['Dirge'].includes(pokemon.species.forme)) {
+				pokemon.addVolatile('dirge'); 
+				pokemon.removeVolatile('dirge');
+			}
+		},
+		onEnd(pokemon) {
+			if (!pokemon.volatiles['dirge'] || !pokemon.hp) return;
+			pokemon.transformed = false;
+			delete pokemon.volatiles['dirge'];
+			if (pokemon.species.baseSpecies === 'Sacrabell-Hymn' && pokemon.species.battleOnly) {
+				pokemon.formeChange(pokemon.species.battleOnly as string, this.effect, false, '[silent]');
+			}
+		},
+		condition: {
+			onStart(pokemon) {
+				if (pokemon.species.id !== 'sacrabelldirge') pokemon.formeChange('Sacrabell-Dirge');
+		
+			},
+			onEnd(pokemon) {
+				if (['Dirge'].includes(pokemon.species.forme)) {
+					pokemon.formeChange(pokemon.species.battleOnly as string);
+				}
+			},
+		},
+		flags: {failroleplay: 1, noreceiver: 1, noentrain: 1, notrace: 1, failskillswap: 1, cantsuppress: 1},
+		name: "Bell of Ruin",
+		rating: 0,
+		num: 2028,
+	},
+	ancientforce: {
+		name: "Ancient Force",
+		shortDesc: "On entry, +1 Atk for each hazard that affects user",
+		num: 2001,
+		flags: {breakable: 1},
+		onSwitchIn(pokemon, target, source) {
+         const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'icespikes'];
+         for (const condition of sideConditions) {
+            if (pokemon.hp) {
+               this.add('-sideend', pokemon.side, this.dex.getEffect(condition).name, '[from] ability: Ancient Force', '[of] ' + pokemon);
+					this.boost({atk: 1}, pokemon);
+            }
+          }
+		},
 	}
 
 
