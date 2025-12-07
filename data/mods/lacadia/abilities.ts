@@ -564,14 +564,14 @@ export const Abilities: {[k: string]: ModdedAbilityData} = {
 	ancientforce: {
 		name: "Ancient Force",
 		shortDesc: "On entry, +1 Atk for each hazard that affects user",
-		num: 2001,
+		num: 2029,
 		flags: {breakable: 1},
 		onSwitchIn(pokemon, target, source) {
          const sideConditions = ['spikes', 'toxicspikes', 'stealthrock', 'stickyweb', 'gmaxsteelsurge', 'icespikes'];
          for (const condition of sideConditions) {
-            if (pokemon.hp) {
-               this.add('-sideend', pokemon.side, this.dex.getEffect(condition).name, '[from] ability: Ancient Force', '[of] ' + pokemon);
-					this.boost({atk: 1}, pokemon);
+            if (pokemon.hp && pokemon.side.sideConditions[condition]) {
+
+				this.boost({atk: pokemon.side.sideConditions[condition].layers}, pokemon);
             }
           }
 		},
