@@ -1,4 +1,4 @@
-export const Pokedex: {[speciesid: string]: SpeciesData} = {
+export const FormatsData: {[k: string]: ModdedSpeciesFormatsData} = {
 	//Lacadia pokemon
 	springbun: {
 		tier: "LC",
